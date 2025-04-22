@@ -1,11 +1,11 @@
-import 'package:auth_account/home_bloc/admin_home_view.dart';
-import 'package:auth_account/home_bloc/user_home_view.dart';
+import 'package:auth_account/home_bloc/view/admin_home_view.dart';
+import 'package:auth_account/home_bloc/view/user_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
-import 'home_bloc.dart';
-import 'home_event.dart';
+import '../home_bloc.dart';
+import '../home_event.dart';
 
 class HomePage extends StatelessWidget {
   final String username;

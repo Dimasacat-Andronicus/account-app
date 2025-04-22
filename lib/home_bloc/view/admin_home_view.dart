@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'home_bloc.dart';
-import 'home_event.dart';
-import 'home_state.dart';
+import '../home_bloc.dart';
+import '../home_event.dart';
+import '../home_state.dart';
 
 class AdminHome extends StatelessWidget {
   const AdminHome({super.key});
