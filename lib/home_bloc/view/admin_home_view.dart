@@ -23,69 +23,86 @@ class AdminHome extends StatelessWidget {
               ),
             );
           }
-          return ListView.builder(
+          return Padding(
             padding: const EdgeInsets.all(16.0),
-            itemCount: accounts.length,
-            itemBuilder: (context, index) {
-              final account = accounts[index];
-              return Card(
-                margin: const EdgeInsets.only(bottom: 12.0),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Accounts',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 16.0,
-                  ),
-                  title: Text(
-                    account['username'] ?? '',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  subtitle: Text(
-                    account['email'] ?? '',
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext dialogContext) {
-                          return AlertDialog(
-                            title: const Text('Confirm Deletion'),
-                            content: const Text(
-                              'Are you sure you want to delete this account?',
+                const SizedBox(height: 26),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: accounts.length,
+                    itemBuilder: (context, index) {
+                      final account = accounts[index];
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 12.0),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal: 16.0,
+                          ),
+                          title: Text(
+                            account['username'] ?? '',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(dialogContext).pop();
-                                },
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  context.read<HomeBloc>().add(
-                                    DeleteAccountEvent(index),
+                          ),
+                          subtitle: Text(
+                            account['email'] ?? '',
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return AlertDialog(
+                                    title: const Text('Confirm Deletion'),
+                                    content: const Text(
+                                      'Are you sure you want to delete this account?',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(dialogContext).pop();
+                                        },
+                                        child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          context.read<HomeBloc>().add(
+                                            DeleteAccountEvent(index),
+                                          );
+                                          Navigator.of(dialogContext).pop();
+                                        },
+                                        child: const Text('Confirm'),
+                                      ),
+                                    ],
                                   );
-                                  Navigator.of(dialogContext).pop();
                                 },
-                                child: const Text('Confirm'),
-                              ),
-                            ],
-                          );
-                        },
+                              );
+                            },
+                          ),
+                        ),
                       );
                     },
                   ),
                 ),
-              );
-            },
+              ],
+            ),
           );
         } else if (state is HomeErrorState) {
           return Center(
