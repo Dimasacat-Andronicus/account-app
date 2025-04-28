@@ -10,9 +10,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _onFetchAccounts(
-    FetchAccountsEvent event,
-    Emitter<HomeState> emit,
-  ) async {
+      FetchAccountsEvent event,
+      Emitter<HomeState> emit,
+      ) async {
     try {
       final box = Hive.box('authBox');
       final accounts = box.get(
@@ -20,8 +20,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         defaultValue: <Map<String, String>>[],
       );
       if (accounts is List) {
-        final parsedAccounts =
-            accounts.map((e) => Map<String, String>.from(e as Map)).toList();
+        final parsedAccounts = accounts
+            .map((e) => Map<String, String>.from(e as Map))
+            .where((account) => account['username'] != 'admin')
+            .toList();
         emit(HomeLoadedState(parsedAccounts));
       } else {
         emit(HomeLoadedState([]));
