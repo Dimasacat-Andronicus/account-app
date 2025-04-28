@@ -1,3 +1,4 @@
+import 'package:auth_account/widgets/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../home_bloc.dart';
@@ -30,10 +31,7 @@ class AdminHome extends StatelessWidget {
               children: [
                 const Text(
                   'Accounts',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 26),
                 Expanded(
@@ -69,28 +67,15 @@ class AdminHome extends StatelessWidget {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext dialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('Confirm Deletion'),
-                                    content: const Text(
-                                      'Are you sure you want to delete this account?',
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(dialogContext).pop();
-                                        },
-                                        child: const Text('Cancel'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          context.read<HomeBloc>().add(
-                                            DeleteAccountEvent(index),
-                                          );
-                                          Navigator.of(dialogContext).pop();
-                                        },
-                                        child: const Text('Confirm'),
-                                      ),
-                                    ],
+                                  return ConfirmationDialog(
+                                    title: 'Confirm Deletion',
+                                    content:
+                                        'Are you sure you want to delete this account?',
+                                    onConfirm: () {
+                                      context.read<HomeBloc>().add(
+                                        DeleteAccountEvent(index),
+                                      );
+                                    },
                                   );
                                 },
                               );
