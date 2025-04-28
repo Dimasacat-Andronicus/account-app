@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
+import '../../widgets/dialog.dart';
 import '../home_bloc.dart';
 import '../home_event.dart';
 
@@ -26,14 +27,24 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),
-              onPressed: () async {
-                final box = Hive.box('authBox');
-                await box.put('isLoggedIn', false);
-                await box.delete('username');
-
-                if (context.mounted) {
-                  context.go('/login');
-                }
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext dialogContext) {
+                    return ConfirmationDialog(
+                      title: 'Confirm Logout',
+                      content: 'Are you sure you want to log out?',
+                      onConfirm: () async {
+                        final box = Hive.box('authBox');
+                        await box.put('isLoggedIn', false);
+                        await box.delete('username');
+                        if (context.mounted) {
+                          context.go('/login');
+                        }
+                      },
+                    );
+                  },
+                );
               },
             ),
           ],
