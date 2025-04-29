@@ -3,7 +3,7 @@
 <h1>Auth App</h1>
 
 ### Explore the Android app on:
-[![Android App](https://img.shields.io/badge/Android%20App-Visit-%236A0DAD?style=for-the-badge&logo=android)](linkhere) 
+[![Android App](https://img.shields.io/badge/Android%20App-Visit-%236A0DAD?style=for-the-badge&logo=android)](https://drive.google.com/file/d/19cA2ek83XCKARlvFaRVSo8jGmzlQEgau/view?usp=drivesdk) 
 
 [![Flutter](https://img.shields.io/badge/Flutter-%2302569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-%230175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
