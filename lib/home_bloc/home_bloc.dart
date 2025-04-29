@@ -10,9 +10,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _onFetchAccounts(
-      FetchAccountsEvent event,
-      Emitter<HomeState> emit,
-      ) async {
+    FetchAccountsEvent event,
+    Emitter<HomeState> emit,
+  ) async {
     try {
       final box = Hive.box('authBox');
       final accounts = box.get(
@@ -20,10 +20,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         defaultValue: <Map<String, String>>[],
       );
       if (accounts is List) {
-        final parsedAccounts = accounts
-            .map((e) => Map<String, String>.from(e as Map))
-            .where((account) => account['username'] != 'admin')
-            .toList();
+        final parsedAccounts =
+            accounts
+                .map((e) => Map<String, String>.from(e as Map))
+                .where((account) => account['username'] != 'admin')
+                .toList();
         emit(HomeLoadedState(parsedAccounts));
       } else {
         emit(HomeLoadedState([]));
@@ -45,13 +46,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
 
       if (accounts is List) {
-        final updatedAccounts = List<Map<String, String>>.from(
-          accounts.map((e) => Map<String, String>.from(e as Map)),
-        );
-        updatedAccounts.removeAt(event.index);
-        await box.put('accounts', updatedAccounts);
+        final parsedAccounts =
+            accounts.map((e) => Map<String, String>.from(e as Map)).toList();
+        final filteredAccounts =
+            parsedAccounts
+                .where((account) => account['username'] != 'admin')
+                .toList();
 
-        emit(HomeLoadedState(updatedAccounts));
+        final accountToDelete = filteredAccounts[event.index];
+        final originalIndex = parsedAccounts.indexOf(accountToDelete);
+
+        parsedAccounts.removeAt(originalIndex);
+        await box.put('accounts', parsedAccounts);
+
+        emit(
+          HomeLoadedState(
+            parsedAccounts
+                .where((account) => account['username'] != 'admin')
+                .toList(),
+          ),
+        );
       } else {
         emit(HomeErrorState('Accounts data is not in the expected format.'));
       }
