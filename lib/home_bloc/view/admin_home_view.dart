@@ -1,4 +1,5 @@
 import 'package:auth_account/widgets/dialog.dart';
+import 'package:auth_account/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../home_bloc.dart';
@@ -75,6 +76,7 @@ class AdminHome extends StatelessWidget {
                                       context.read<HomeBloc>().add(
                                         DeleteAccountEvent(index),
                                       );
+                                      SuccessSnackbar.showSuccess(context, 'Account deleted successfully.');
                                     },
                                   );
                                 },
