@@ -10,18 +10,20 @@
 </div>
 
 ## About
-##### Simple account application for authenticating.
-##### This app was made using BLoC state management.
+##### A simple account management application for authentication.
+##### Built using the BLoC state management pattern.
+##### Utilizes Hive, a lightweight NoSQL database, for local data storage.
 ##### Dependencies: flutter_bloc, lottie, equatable, hive_flutter, hive, go_router, and google_fonts.
 -------------------------
 ## Features
-##### Login and Registration.
-##### Two home pages: Admin and User.
-##### Admin see all account registered and can also delete accounts.
+##### Login and Registration functionality.
+##### Separate home pages for Admin and User roles.
+##### Admin can view and delete all registered accounts.
 ------------------------
 ## How to Use
-##### First and foremost, create an admin account with a username 'admin'.
-##### After you register the admin account, you can now have the access for admin.
+##### Start by creating an admin account with the username 'admin'.
+##### Once the admin account is registered, admin access will be granted.
 ------------------------
 ## Note
-##### The email in the register field is just an input field, just for informational purposes only.
+##### The email field in the registration form is purely informational and serves no functional purpose.
+##### Usernames are unique, so you cannot register the same username.
