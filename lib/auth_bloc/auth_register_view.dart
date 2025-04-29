@@ -1,3 +1,4 @@
+import 'package:auth_account/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -168,6 +169,11 @@ class RegisterPage extends StatelessWidget {
                             email: email,
                             context: context,
                           ),
+                        );
+
+                        SuccessSnackbar.showSuccess(
+                          context,
+                          'Registration successful!',
                         );
 
                         context.go('/login');
