@@ -1,3 +1,4 @@
+import 'package:auth_account/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -70,14 +71,18 @@ class LoginPage extends StatelessWidget {
                           account['password'] == password,
                     );
 
+                    if (username.isEmpty || password.isEmpty) {
+                      ErrorSnackbar.showError(
+                        context,
+                        "Username and password cannot be empty",
+                      );
+                      return;
+                    }
+
                     if (!isValid) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Either the username or password is incorrect.',
-                          ),
-                          backgroundColor: Colors.blueGrey,
-                        ),
+                      ErrorSnackbar.showError(
+                        context,
+                        "Either the username or password is incorrect",
                       );
                       return;
                     }
