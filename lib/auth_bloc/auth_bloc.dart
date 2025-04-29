@@ -71,26 +71,6 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       await box.put('accounts', accounts);
 
       emit(AuthBlocState(isLoggedIn: false));
-
-      if (event.context.mounted) {
-        showDialog(
-          context: event.context,
-          builder:
-              (context) => AlertDialog(
-                title: Text('Registration Successful'),
-                content: Text('Your account has been created successfully.'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.pop(event.context);
-                    },
-                    child: Text('OK'),
-                  ),
-                ],
-              ),
-        );
-      }
     });
   }
 }
