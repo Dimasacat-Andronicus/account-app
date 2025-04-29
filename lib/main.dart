@@ -1,6 +1,7 @@
 import 'package:auth_account/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'auth_bloc/auth_bloc.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         title: 'Login / Register',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+          textTheme: GoogleFonts.poppinsTextTheme(),
         ),
         debugShowCheckedModeBanner: false,
         routerConfig: AppRoutes.getRouter(isLoggedIn, username),
